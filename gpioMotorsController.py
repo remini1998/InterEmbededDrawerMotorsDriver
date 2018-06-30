@@ -6,7 +6,7 @@ stepPin = 8
 dir1Pin = 10
 dir2Pin = 12
 motoPin = 40
-sleepTime = 0.005
+sleepTime = 0.00015
 motoSleepTime = 0.1
 motoUpDegree = 360
 
@@ -53,7 +53,7 @@ class DeviceController:
         self._nowMoto = degree
 
     def _set_moto_degree(self, degree):
-        self.motoPwm.ChangeDutyCycle(12.5 - 16 * degree / 360)
+        self.motoPwm.ChangeDutyCycle(12.5 - 20 * degree / 360)
 
     def go_to(self, x, y):
         pos = round(x / maxX * maxPos)
