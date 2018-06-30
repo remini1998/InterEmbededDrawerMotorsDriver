@@ -73,7 +73,7 @@ class DrawerMeta(object):
             if self.is_test:
                 print("pen down")
             self._drawer_device.down()
-            self.pen_status = 0
+            self.pen_status = 1
         else:
             if self.is_test:
                 print("[ERROR] pen already down")
@@ -85,9 +85,9 @@ class DrawerMeta(object):
             bx=begin[0], by=begin[1], ex=end[0], ey=end[1]
         ))
         self._drawer_device.go_to(begin[0], begin[1])
-        self.pen_down()
+   #     self.pen_down()
         self._drawer_device.go_to(end[0], end[1])
-        self.pen_up()
+  #      self.pen_up()
 
     def start_draw(self):
         blen = len(self.begin_data)
@@ -95,7 +95,7 @@ class DrawerMeta(object):
         if blen != elen:
             raise BaseException("Data Lenght Error")
         # start draw up
-        self.pen_up()
+ #       self.pen_up()
         for i in range(blen):
             self.draw_data(self.begin_data[i], self.end_data[i])
 
