@@ -17,7 +17,12 @@ class DrawerMeta(object):
         self.y_edge = 0 # max y
         self._drawer_device = DeviceController()
 
-        self.pen_status = 1 # down 1 up 0
+        self.current_begin = None
+        self.current_end = None
+
+        self.move_x_rule = 5.0
+        self.move_y_rule = 5.0
+        self.pen_status = 0 # down 1 up 0
 
     @staticmethod
     def f(item):
@@ -84,10 +89,17 @@ class DrawerMeta(object):
         print("draw from ({bx}, {by}) to ({ex}, {ey})".format(
             bx=begin[0], by=begin[1], ex=end[0], ey=end[1]
         ))
+        flag = False
+        if self.current_begin and self.current_end:
+            if (abs(self.current_end[0] - begin[0]) > self.move_x_rule) or (abs(self.current_end[1] - begin[1]) > self.move_y_rule):
+                flag = True
+        if flag:
+            self.pen_up()
         self._drawer_device.go_to(begin[0], begin[1])
-   #     self.pen_down()
+        if flag:
+            self.pen_down()
         self._drawer_device.go_to(end[0], end[1])
-  #      self.pen_up()
+        self.current_end = end
 
     def start_draw(self):
         blen = len(self.begin_data)
@@ -95,7 +107,7 @@ class DrawerMeta(object):
         if blen != elen:
             raise BaseException("Data Lenght Error")
         # start draw up
- #       self.pen_up()
+        self.pen_down()
         for i in range(blen):
             self.draw_data(self.begin_data[i], self.end_data[i])
 
