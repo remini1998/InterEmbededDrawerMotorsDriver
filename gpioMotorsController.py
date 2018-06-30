@@ -7,7 +7,7 @@ dir1Pin = 10
 dir2Pin = 12
 motoPin = 40
 sleepTime = 0.00015
-motoSleepTime = 0.1
+motoSleepTime = 0.02
 motoUpDegree = 360
 
 # 横向最大步进数
@@ -19,7 +19,7 @@ maxDepth = 7000
 # 纵向最大映像范围
 maxY = 1000
 # 落笔
-motoDown = 0
+motoDown = 90
 # 抬笔
 motoUp = 180
 
