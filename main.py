@@ -17,8 +17,8 @@ class DrawerMeta(object):
         self.y_edge = 0 # max y
         self._drawer_device = DeviceController()
 
-        self.current_begin = None
-        self.current_end = None
+     #   self.current_begin = None
+        self.current_end = [-1, -1]
 
         self.move_x_rule = 5.0
         self.move_y_rule = 5.0
@@ -90,8 +90,10 @@ class DrawerMeta(object):
             bx=begin[0], by=begin[1], ex=end[0], ey=end[1]
         ))
         flag = False
-        if self.current_begin and self.current_end:
-            if (abs(self.current_end[0] - begin[0]) > self.move_x_rule) or (abs(self.current_end[1] - begin[1]) > self.move_y_rule):
+        if self.current_end:
+            if self.current_end[0] < 0.0:
+                flag = True
+            elif (abs(self.current_end[0] - begin[0]) > self.move_x_rule) or (abs(self.current_end[1] - begin[1]) > self.move_y_rule):
                 flag = True
         if flag:
             self.pen_up()
