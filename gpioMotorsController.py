@@ -5,6 +5,7 @@ import RPi.GPIO as GPIO
 stepPin = 8
 dir1Pin = 10
 dir2Pin = 12
+sensorPin = 38
 motoPin = 40
 sleepTime = 0.00015
 motoSleepTime = 0.02
@@ -23,6 +24,11 @@ motoDown = 90
 # 抬笔
 motoUp = 180
 
+# 设置检测到人进入后是否暂停
+needPause = False
+
+# 设置检测到人进入后是否中断（优先）
+needStop = False
 
 class DeviceController:
     def __init__(self):
@@ -58,7 +64,7 @@ class DeviceController:
     def go_to(self, x, y):
         pos = round(x / maxX * maxPos)
         dep = round(y / maxY * maxDepth)
-        self._go_to(pos, dep)
+        return self._go_to(pos, dep)
 
     def _go_to(self, pos, depth):
         def need_step(delta, now, total):
@@ -76,18 +82,25 @@ class DeviceController:
             count += 1
             if need_step(delta_pos, count, steps):
                 dir = 1 if delta_pos >= 0 else -1
-                self._move_pos(dir)
+                self._nowPos += dir
+                if not self._move_pos(dir):
+                    return False
             if need_step(delta_depth, count, steps):
                 dir = 1 if delta_depth >= 0 else -1
-                self._move_depth(dir)
+                self._nowPos += dir
+                if not self._move_depth(dir):
+                    return False
         self._nowPos = pos
         self._nowDepth = depth
+        return True
 
     def _init(self):
 
         GPIO.setwarnings(False)
 
         GPIO.setmode(GPIO.BOARD)
+
+        GPIO.setup(sensorPin, GPIO.IN)
 
         GPIO.setup(stepPin, GPIO.OUT)
         GPIO.setup(dir1Pin, GPIO.OUT)
@@ -109,11 +122,18 @@ class DeviceController:
         if times < 0:
             times = -times
         while times > 0:
+            if GPIO.input(sensorPin) == 1:
+                if needStop:
+                    return False
+                if needPause:
+                    while GPIO.input(sensorPin) == 1:
+                        pass
             GPIO.output(pin, True)
             time.sleep(sleepTime)
             GPIO.output(pin, False)
             time.sleep(sleepTime)
             times -= 1
+        return True
 
     def _move_pos(self, times):
         # 正方向
@@ -126,7 +146,7 @@ class DeviceController:
             # 向左移动
             self._set_direction(dir1Pin, not positive_dir)
             self._set_direction(dir2Pin, not positive_dir)
-        self._move_pulse(stepPin, times)
+        return self._move_pulse(stepPin, times)
 
     def _move_depth(self, times):
         # 正方向
@@ -139,7 +159,7 @@ class DeviceController:
             # 向 浅/远离用户 方向移动
             self._set_direction(dir1Pin, positive_dir)
             self._set_direction(dir2Pin, not positive_dir)
-        self._move_pulse(stepPin, times)
+        return self._move_pulse(stepPin, times)
 
 
 if __name__ == '__main__':
