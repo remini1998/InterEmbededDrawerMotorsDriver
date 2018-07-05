@@ -12,7 +12,7 @@ pauseBtnPin = 36
 sleepTime = 0.00015
 motoSleepTime = 0.02
 btnCheckTime = 0.2
-motoUpDegree = 360
+resetTime = 5
 
 # 横向最大步进数
 maxPos = 5000
@@ -123,8 +123,7 @@ class DeviceController:
     def _set_direction(pin, val):
         GPIO.output(pin, val)
 
-    @staticmethod
-    def _move_pulse(pin, times=1):
+    def _move_pulse(self, pin, times=1):
         if times < 0:
             times = -times
         while times > 0:
@@ -134,6 +133,15 @@ class DeviceController:
                     time.sleep(btnCheckTime)
                 while GPIO.input(pauseBtnPin) != 1:
                     # print("waiting for restart")
+                    time.sleep(btnCheckTime)
+                # 判断是否是长按复位
+                total_time = 0
+                while GPIO.input(pauseBtnPin) == 1:
+                    total_time += btnCheckTime
+                    if total_time > resetTime:
+                        self.goto(0, 0)
+                        time.sleep(btnCheckTime * 10)
+                        return False
                     time.sleep(btnCheckTime)
                 time.sleep(btnCheckTime * 10)
 
