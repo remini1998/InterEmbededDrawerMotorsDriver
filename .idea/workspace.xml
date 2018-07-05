@@ -29,8 +29,8 @@
       <file leaf-file-name="gpioMotorsController.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gpioMotorsController.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="126" column="17" selection-start-line="126" selection-start-column="17" selection-end-line="126" selection-end-column="17" />
+            <state relative-caret-position="121">
+              <caret line="142" column="32" selection-start-line="142" selection-start-column="32" selection-end-line="142" selection-end-column="32" />
               <folding>
                 <element signature="e#15#26#0" expanded="true" />
               </folding>
@@ -140,7 +140,21 @@
       <option name="project" value="LOCAL" />
       <updated>1530595508934</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add reset">
+      <created>1530778191534</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1530778191534</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fire bugs">
+      <created>1530778271740</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1530778271740</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView">
@@ -154,7 +168,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32952926" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -213,7 +226,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="更新了传感器暂停和中断" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新了传感器暂停和中断" />
+    <MESSAGE value="add reset" />
+    <MESSAGE value="fire bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="fire bugs" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/test/sensor-value-dector.py">
@@ -268,8 +283,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gpioMotorsController.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="126" column="17" selection-start-line="126" selection-start-column="17" selection-end-line="126" selection-end-column="17" />
+        <state relative-caret-position="121">
+          <caret line="142" column="32" selection-start-line="142" selection-start-column="32" selection-end-line="142" selection-end-column="32" />
           <folding>
             <element signature="e#15#26#0" expanded="true" />
           </folding>

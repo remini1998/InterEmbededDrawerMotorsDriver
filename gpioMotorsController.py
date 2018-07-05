@@ -140,7 +140,7 @@ class DeviceController:
                     total_time += btnCheckTime
                     if total_time > resetTime:
                         self.up()
-                        self.goto(0, 0)
+                        self.go_to(0, 0)
                         time.sleep(btnCheckTime * 10)
                         return False
                     time.sleep(btnCheckTime)
