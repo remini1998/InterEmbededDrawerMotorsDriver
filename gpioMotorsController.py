@@ -106,6 +106,7 @@ class DeviceController:
         GPIO.setmode(GPIO.BOARD)
 
         GPIO.setup(sensorPin, GPIO.IN)
+        GPIO.setup(pauseBtnPin, GPIO.IN)
 
         GPIO.setup(stepPin, GPIO.OUT)
         GPIO.setup(dir1Pin, GPIO.OUT)
@@ -127,11 +128,14 @@ class DeviceController:
         if times < 0:
             times = -times
         while times > 0:
-	    if usePauseBtn and GPIO.input(pauseBtnPin) == 1:
-		while GPIO.input(pauseBtnPin) == 1:
-		    time.sleep(btnCheckTime)
-		while GPIO.input(pauseBtnPin) != 1:
-		    time.sleep(btnCheckTime)
+            if usePauseBtn and GPIO.input(pauseBtnPin) == 1:
+                while GPIO.input(pauseBtnPin) == 1:
+                    # print("waiting for btn up")
+                    time.sleep(btnCheckTime)
+                while GPIO.input(pauseBtnPin) != 1:
+                    # print("waiting for restart")
+                    time.sleep(btnCheckTime)
+                time.sleep(btnCheckTime * 10)
 
             if GPIO.input(sensorPin) == 1:
                 if needStop:
