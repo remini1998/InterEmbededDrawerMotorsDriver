@@ -7,8 +7,11 @@ dir1Pin = 10
 dir2Pin = 12
 sensorPin = 38
 motoPin = 40
+pauseBtnPin = 36
+
 sleepTime = 0.00015
 motoSleepTime = 0.02
+btnCheckTime = 0.2
 motoUpDegree = 360
 
 # 横向最大步进数
@@ -29,6 +32,8 @@ needPause = False
 
 # 设置检测到人进入后是否中断（优先）
 needStop = False
+
+usePauseBtn = True
 
 class DeviceController:
     def __init__(self):
@@ -122,6 +127,12 @@ class DeviceController:
         if times < 0:
             times = -times
         while times > 0:
+	    if usePauseBtn and GPIO.input(pauseBtnPin) == 1:
+		while GPIO.input(pauseBtnPin) == 1:
+		    time.sleep(btnCheckTime)
+		while GPIO.input(pauseBtnPin) != 1:
+		    time.sleep(btnCheckTime)
+
             if GPIO.input(sensorPin) == 1:
                 if needStop:
                     return False
@@ -188,13 +199,13 @@ if __name__ == '__main__':
     #    count += step
     #    print(count)
 
-    dc.down()
-    dc.go_to(1000, 1000)
-    dc.up()
+#    dc.down()
+  #  dc.go_to(1000, 1000)
+ #   dc.up()
     dc.go_to(1000, 0)
-    dc.down()
-    dc.go_to(0, 0)
-    dc.up()
+  #  dc.down()
+  #  dc.go_to(0, 0)
+  #  dc.up()
 
 # GPIO.setup(dir1Pin, True)
 # GPIO.setup(dir2Pin, True)

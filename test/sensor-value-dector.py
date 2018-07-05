@@ -2,7 +2,7 @@
 import time
 import RPi.GPIO as GPIO
 
-sensorPin = 38
+sensorPin = 36
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
