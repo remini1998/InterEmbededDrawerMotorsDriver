@@ -139,6 +139,8 @@ class DeviceController:
                 while GPIO.input(pauseBtnPin) == 1:
                     total_time += btnCheckTime
                     if total_time > resetTime:
+                        print("start reset")
+                        time.sleep(btnCheckTime * 10)
                         self.up()
                         self.go_to(0, 0)
                         time.sleep(btnCheckTime * 10)
