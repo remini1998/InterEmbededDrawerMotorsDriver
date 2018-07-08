@@ -227,12 +227,17 @@ if __name__ == '__main__':
     print("4")
     dc.go_to(0, 0)
 
+    print("test-all")
     dc.down()
+    print("1")
     dc.go_to(1000, 1000)
+    print("2")
     dc.up()
     dc.go_to(1000, 0)
+    print("3")
     dc.down()
     dc.go_to(0, 0)
+    print("4")
     dc.up()
 
 # GPIO.setup(dir1Pin, True)
