@@ -217,9 +217,14 @@ if __name__ == '__main__':
     dc.down()
     dc.up()
     
+    print("move straight")
+    print("1")
     dc.go_to(200, 0)
+    print("2")
     dc.go_to(0, 0)
+    print("3")
     dc.go_to(0, 200)
+    print("4")
     dc.go_to(0, 0)
 
     dc.down()
