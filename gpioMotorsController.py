@@ -214,13 +214,13 @@ if __name__ == '__main__':
     #    count += step
     #    print(count)
 
-#    dc.down()
-  #  dc.go_to(1000, 1000)
- #   dc.up()
+    dc.down()
+    dc.go_to(1000, 1000)
+    dc.up()
     dc.go_to(1000, 0)
-  #  dc.down()
-  #  dc.go_to(0, 0)
-  #  dc.up()
+    dc.down()
+    dc.go_to(0, 0)
+    dc.up()
 
 # GPIO.setup(dir1Pin, True)
 # GPIO.setup(dir2Pin, True)
