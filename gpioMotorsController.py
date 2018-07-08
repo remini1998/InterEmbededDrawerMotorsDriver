@@ -191,10 +191,10 @@ class DeviceController:
 if __name__ == '__main__':
     dc = DeviceController()
     # dc._move_pulse(stepPin, 100)
-    dc._move_pos(100)
-    dc._move_pos(-100)
-    dc._move_depth(100)
-    dc._move_depth(-100)
+    # dc._move_pos(100)
+    # dc._move_pos(-100)
+    # dc._move_depth(100)
+    # dc._move_depth(-100)
 
     # dc.up()
     # dc.go_to(50, 100)
@@ -213,6 +213,14 @@ if __name__ == '__main__':
     #    dc._move_depth(step)
     #    count += step
     #    print(count)
+    
+    dc.down()
+    dc.up()
+    
+    dc.go_to(200, 0)
+    dc.go_to(0, 0)
+    dc.go_to(0, 200)
+    dc.go_to(0, 0)
 
     dc.down()
     dc.go_to(1000, 1000)
