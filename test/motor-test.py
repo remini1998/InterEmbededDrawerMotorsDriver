@@ -5,6 +5,11 @@ import RPi.GPIO as GPIO
 stepPin = 8
 sleepTime = 0.02
 
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
+
+GPIO.setup(stepPin, GPIO.IN)
+
 while True:
     GPIO.output(stepPin, True)
     time.sleep(sleepTime)
