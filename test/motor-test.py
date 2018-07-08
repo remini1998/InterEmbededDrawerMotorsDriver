@@ -8,7 +8,7 @@ sleepTime = 0.02
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 
-GPIO.setup(stepPin, GPIO.IN)
+GPIO.setup(stepPin, GPIO.OUT)
 
 while True:
     GPIO.output(stepPin, True)
