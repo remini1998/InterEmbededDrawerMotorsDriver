@@ -27,8 +27,10 @@ motoDown = 90
 # 抬笔
 motoUp = 180
 
+btnPressedValue = 1
+
 # 设置检测到人进入后是否暂停
-needPause = False
+needPause = True
 
 # 设置检测到人进入后是否中断（优先）
 needStop = False
@@ -92,7 +94,7 @@ class DeviceController:
                     return False
             if need_step(delta_depth, count, steps):
                 dir = 1 if delta_depth >= 0 else -1
-                self._nowPos += dir
+                self._nowDepth += dir
                 if not self._move_depth(dir):
                     return False
         self._nowPos = pos
@@ -127,16 +129,16 @@ class DeviceController:
         if times < 0:
             times = -times
         while times > 0:
-            if usePauseBtn and GPIO.input(pauseBtnPin) == 1:
-                while GPIO.input(pauseBtnPin) == 1:
-                    # print("waiting for btn up")
+            if usePauseBtn and GPIO.input(pauseBtnPin) == btnPressedValue:
+                while GPIO.input(pauseBtnPin) == btnPressedValue:
+                    print("waiting for btn up")
                     time.sleep(btnCheckTime)
-                while GPIO.input(pauseBtnPin) != 1:
-                    # print("waiting for restart")
+                while GPIO.input(pauseBtnPin) != btnPressedValue:
+                    print("waiting for restart")
                     time.sleep(btnCheckTime)
                 # 判断是否是长按复位
                 total_time = 0
-                while GPIO.input(pauseBtnPin) == 1:
+                while GPIO.input(pauseBtnPin) == btnPressedValue:
                     total_time += btnCheckTime
                     if total_time > resetTime:
                         print("start reset")
@@ -149,11 +151,14 @@ class DeviceController:
                 time.sleep(btnCheckTime * 10)
 
             if GPIO.input(sensorPin) == 1:
+                print("detected people and stop")
                 if needStop:
+                    print("system stopped")
                     return False
                 if needPause:
                     while GPIO.input(sensorPin) == 1:
                         pass
+                print("continue")
             GPIO.output(pin, True)
             time.sleep(sleepTime)
             GPIO.output(pin, False)
