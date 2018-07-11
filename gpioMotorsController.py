@@ -215,7 +215,7 @@ class DeviceController:
                     step /= 10
     
     
-    def test_pos_depth(self):
+    def test_dep_length(self):
         count = 0
         while True:
             count += 1
