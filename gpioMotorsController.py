@@ -191,6 +191,49 @@ class DeviceController:
             self._set_direction(dir1Pin, positive_dir)
             self._set_direction(dir2Pin, not positive_dir)
         return self._move_pulse(stepPin, times)
+    
+    def test_pos_length(self):
+        count = 0
+        step = 1000
+        while True:
+            count += 1
+            _move_pos(self, 1)
+            
+            if count % step == 0:
+                print("-----------------------------------------")
+                print("  now count:" + count)
+                print("  now step:" + step)
+                print("    input 's' to stop,")
+                print("    input '+/-' to scale step 10 times")
+                print("    others to continue")
+                i = input("Your choice: ")
+                if i == "s":
+                    return
+                if i == "+":
+                    step *= 10
+                if i == "-":
+                    step /= 10
+    
+    
+    def test_pos_depth(self):
+        count = 0
+        while True:
+            count += 1
+            _move_depth(self, 1)
+            if count % step == 0:
+                print("-----------------------------------------")
+                print("  now count:" + count)
+                print("  now step:" + step)
+                print("    input 's' to stop,")
+                print("    input '+/-' to scale step 10 times")
+                print("    others to continue")
+                i = input("Your choice: ")
+                if i == "s":
+                    return
+                if i == "+":
+                    step *= 10
+                if i == "-":
+                    step /= 10
 
 
 if __name__ == '__main__':
