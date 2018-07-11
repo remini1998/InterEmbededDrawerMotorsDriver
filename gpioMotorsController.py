@@ -197,7 +197,7 @@ class DeviceController:
         step = 1000
         while True:
             count += 1
-            self._move_pos(self, 1)
+            self._move_pos(1)
             
             if count % step == 0:
                 print("-----------------------------------------")
@@ -219,7 +219,7 @@ class DeviceController:
         count = 0
         while True:
             count += 1
-            self._move_depth(self, 1)
+            self._move_depth(1)
             if count % step == 0:
                 print("-----------------------------------------")
                 print("  now count:" + count)
