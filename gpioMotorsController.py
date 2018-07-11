@@ -15,11 +15,11 @@ btnCheckTime = 0.2
 resetTime = 5
 
 # 横向最大步进数
-maxPos = 5000
+maxPos = 6200
 # 横向最大映像范围
 maxX = 1000
 # 纵向最大步进数
-maxDepth = 7000
+maxDepth = 6200
 # 纵向最大映像范围
 maxY = 1000
 # 落笔
@@ -201,8 +201,8 @@ class DeviceController:
             
             if count % step == 0:
                 print("-----------------------------------------")
-                print("  now count:" + count)
-                print("  now step:" + step)
+                print("  now count:", count)
+                print("  now step:", step)
                 print("    input 's' to stop,")
                 print("    input '+/-' to scale step 10 times")
                 print("    others to continue")
@@ -217,13 +217,14 @@ class DeviceController:
     
     def test_dep_length(self):
         count = 0
+        step = 1000
         while True:
             count += 1
             self._move_depth(1)
             if count % step == 0:
                 print("-----------------------------------------")
-                print("  now count:" + count)
-                print("  now step:" + step)
+                print("  now count:" + str(count))
+                print("  now step:" + str(step))
                 print("    input 's' to stop,")
                 print("    input '+/-' to scale step 10 times")
                 print("    others to continue")
